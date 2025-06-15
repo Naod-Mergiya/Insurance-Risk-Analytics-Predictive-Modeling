@@ -1,0 +1,4 @@
+[core]
+    remote = e_storage
+['remote "e_storage"']
+    url = E:\data_storage

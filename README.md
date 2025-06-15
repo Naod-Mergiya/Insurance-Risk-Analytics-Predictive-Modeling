@@ -24,3 +24,32 @@
 - [Loss Ratio by Province](visualizations/loss_ratio_province.png)
 - [Premium vs Claims by PostalCode](visualizations/scatter_premium_claims_postalcode.png)
 - [Premium by CoverType and Province](visualizations/premium_province_covertype.png)
+
+## Task 2: Data Versioning and Exploratory Data Analysis (EDA)
+
+### Objective
+Implement data versioning using DVC and perform initial EDA on the `MachineLearningRating_v3.txt` dataset.
+
+### Steps Completed
+- **Set up DVC**: Initialized DVC and configured a local remote storage at `E:\data_storage`.
+- **Tracked Data**: Added `MachineLearningRating_v3.txt` to DVC tracking.
+- **Data Loading**: Successfully loaded the dataset in `EDA.ipynb` using `dvc.api.open` and the `load_data` function from `src/data_loader.py`.
+- **EDA Integration**: Updated `run_eda.py` to use DVC for data loading and prepared for univariate and bivariate analysis.
+- **Version Control**: Committed changes to Git and pushed to the `task-2` branch.
+- **DVC Push**: Pushed data to the local DVC remote.
+
+### Files Updated
+- `EDA.ipynb`: Added data loading and initial EDA setup.
+- `run_eda.py`: Integrated DVC and data loading logic.
+- `src/data_loader.py`: Defined the `load_data` function.
+- `.dvcignore`, `.dvc/config`: Configured DVC settings.
+- `.gitignore`: Updated to ignore data files and caches.
+
+### Next Steps
+- Complete univariate and bivariate analysis in `run_eda.py`.
+- Generate visualizations and document findings.
+- Prepare for Task 3 (e.g., predictive modeling).
+
+### Notes
+- Dataset contains 1,000,098 rows with columns (32, 37) having mixed types (resolved with `low_memory=False`).
+- Current working directory and Python path adjusted using `sys.path.append`.

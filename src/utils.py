@@ -12,6 +12,40 @@ logger = logging.getLogger(__name__)
 sns.set_style("whitegrid")
 plt.rcParams['figure.figsize'] = (10, 6)
 
+def load_data(file_path: str) -> pd.DataFrame:
+         """
+         Load CSV data from the specified file path.
+         
+         Args:
+             file_path (str): Path to the CSV file.
+             
+         Returns:
+             pd.DataFrame: Loaded DataFrame.
+             
+         Raises:
+             FileNotFoundError: If the file does not exist.
+             pd.errors.EmptyDataError: If the file is empty.
+         """
+         try:
+             if not os.path.exists(file_path):
+                 raise FileNotFoundError(f"File not found: {file_path}")
+             
+             df = pd.read_csv(file_path, delimiter='|', encoding='utf-8')
+             logger.info(f"Successfully loaded data from {file_path} with {len(df)} rows")
+             
+             # Basic validation
+             if df.empty:
+                 raise pd.errors.EmptyDataError("The CSV file is empty")
+             
+             print("Available Columns:")
+             print(df.columns.tolist())
+             print("\nData Types:")
+             print(df.dtypes)
+             return df
+         except Exception as e:
+             logger.error(f"Error loading data: {e}")
+             raise
+
 def clean_numerical_columns(df, numerical_cols):
     """Clean numerical columns by handling comma-separated formats."""
     for col in numerical_cols:

@@ -1,9 +1,8 @@
 import pandas as pd
-import logging
 import os
+import logging
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def load_data(file_path: str) -> pd.DataFrame:
@@ -24,21 +23,17 @@ def load_data(file_path: str) -> pd.DataFrame:
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"File not found: {file_path}")
         
-        df = pd.read_csv(file_path, delimiter='|' ,encoding='utf-8')
+        df = pd.read_csv(file_path, delimiter='|', encoding='utf-8', low_memory=False)
         logger.info(f"Successfully loaded data from {file_path} with {len(df)} rows")
         
-        # Basic validation
         if df.empty:
             raise pd.errors.EmptyDataError("The CSV file is empty")
         
+        print("Available Columns:")
+        print(df.columns.tolist())
+        print("\nData Types:")
+        print(df.dtypes)
         return df
-    
-    except FileNotFoundError as e:
-        logger.error(str(e))
-        raise
-    except pd.errors.EmptyDataError as e:
-        logger.error(str(e))
-        raise
     except Exception as e:
-        logger.error(f"Error loading data: {str(e)}")
+        logger.error(f"Error loading data: {e}")
         raise

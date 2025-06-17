@@ -62,3 +62,25 @@ def detect_missing_values(df: pd.DataFrame) -> tuple:
         logger.error(f"Error detecting missing values: {str(e)}")
         raise
 
+def sample_data (file_path,nrows):
+
+    """
+    Detect missing values and their percentages.
+    
+    Args:
+        df (pd.DataFrame): Input DataFrame.
+        
+    Returns:
+        tuple: (missing_counts, missing_percentages)
+    """
+    try:
+        df_sample = pd.read_csv(file_path, nrows=5)
+        print(df_sample.head())
+        print("Columns:", df_sample.columns.tolist())
+        logger.info("sample data")
+        return sample_data
+    except Exception as e:
+        logger.error(f"Error sample data: {str(e)}")
+        print("Error:", e)
+    
+
